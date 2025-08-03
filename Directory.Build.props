@@ -8,6 +8,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MichaelGrafnetter/ManagedEsent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MichaelGrafnetter/ManagedEsent.git</RepositoryUrl>
+    <PackageIcon>logo.png</PackageIcon>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -26,6 +27,7 @@
   <ItemGroup>
     <!-- Additional files to include in NuGet packages -->
     <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" PackagePath="/" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)EsentInterop/Esent/ManagedEseLogo128x128.png" Pack="true" PackagePath="/logo.png" Visible="false" />
     <!-- Enable source-link -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
   </ItemGroup>

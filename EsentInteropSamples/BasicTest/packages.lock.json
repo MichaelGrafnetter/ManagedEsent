@@ -40,7 +40,7 @@
         "type": "Project"
       }
     },
-    ".NETFramework,Version=v4.6.2/win-x86": {},
+    ".NETFramework,Version=v4.6.2/win7-x86": {},
     ".NETStandard,Version=v2.1": {
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",
@@ -66,6 +66,6 @@
         "type": "Project"
       }
     },
-    ".NETStandard,Version=v2.1/win-x86": {}
+    ".NETStandard,Version=v2.1/win7-x86": {}
   }
 }

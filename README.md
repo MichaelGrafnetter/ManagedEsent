@@ -26,11 +26,13 @@ The intention was to modify as few files as possible. The following files have b
 | [DSInternals.Community.snk]       | Public-private key pair for assembly strong name signing. |
 | [.github/workflows/autobuild.yml] | Automated build using GitHub Actions. |
 | `*/packages.lock.json`            | Package lock files to enable NuGet package caching at GitHub. |
+| [global.json]                     | Specifies the .NET SDK version dependency. |
 
 [Directory.Build.props]: Directory.Build.props
 [Directory.Build.targets]: Directory.Build.targets
 [DSInternals.Community.snk]: DSInternals.Community.snk
 [.github/workflows/autobuild.yml]: .github/workflows/autobuild.yml
+[global.json]: global.json
 
 The newly generated public key has been injected into all `AssemblyInfo.cs` files.
 
