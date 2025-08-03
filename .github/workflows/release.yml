@@ -1,0 +1,93 @@
+name: 'Release Build'
+run-name: 'Release Build'
+
+on:
+  workflow_dispatch:
+    inputs:
+      certificate_sign:
+        description: 'Sign the binaries and packages using a certificate stored in Azure Key Vault?'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+      id-token: write
+      contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build:
+    name: 'Build'
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+          cache: true
+          cache-dependency-path: '*/packages.lock.json'
+
+    - name: Restore NuGet Packages
+      run: dotnet restore ./EsentInterop/Esent.sln --locked-mode
+
+    - name: Build Binaries
+      run: dotnet build ./EsentInterop/Esent.sln --configuration Release --no-restore
+
+    - name: Install Code Signing Tools
+      if: ${{ inputs.certificate_sign }}
+      run: |
+        dotnet tool install --global --prerelease sign
+
+    - name: Azure Login
+      uses: azure/login@v2
+      if: ${{ inputs.certificate_sign }}
+      with:
+        client-id: ${{ secrets.SIGNING_CLIENT_ID }}
+        tenant-id: ${{ secrets.SIGNING_TENANT_ID }}
+        allow-no-subscriptions: true
+
+    - name: Sign Binaries
+      shell: cmd
+      if: ${{ inputs.certificate_sign }}
+      run: >
+        sign code azure-key-vault
+        "EsentInterop/bin/Release/netstandard2.0/Esent.Interop.dll"
+        "isam/bin/Release/netstandard2.0/Esent.Isam.dll"
+        "EsentCollections/bin/Release/netstandard2.0/Esent.Collections.dll"
+        --azure-key-vault-url "${{ secrets.SIGNING_KEY_VAULT_URL }}"
+        --azure-key-vault-certificate "${{ secrets.SIGNING_KEY_VAULT_CERTIFICATE }}"
+        --azure-credential-type azure-cli
+        --file-digest SHA256
+        --timestamp-digest SHA256
+        --timestamp-url "http://timestamp.acs.microsoft.com"
+        --verbosity Information
+        
+    - name: Create NuGet Packages
+      run: dotnet pack EsentInterop/Esent.sln --output ./packages/ --configuration Release --no-build
+
+    - name: Sign NuGet Packages
+      shell: cmd
+      if: ${{ inputs.certificate_sign }}
+      run: >
+        sign code trusted-signing
+        *.*nupkg
+        --base-directory "${{ github.workspace }}/packages"
+        --azure-key-vault-url "${{ secrets.SIGNING_KEY_VAULT_URL }}"
+        --azure-key-vault-certificate "${{ secrets.SIGNING_KEY_VAULT_CERTIFICATE }}"
+        --azure-credential-type azure-cli
+        --file-digest SHA256
+        --timestamp-digest SHA256
+        --timestamp-url "http://timestamp.acs.microsoft.com"
+        --verbosity Information
+
+    - name: Upload NuGet Packages as Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: NuGet
+        path: packages/*nupkg
