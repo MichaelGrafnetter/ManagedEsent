@@ -34,7 +34,7 @@ jobs:
           cache-dependency-path: '*/packages.lock.json'
 
     - name: Restore NuGet Packages
-      run: dotnet restore ./EsentInterop/Esent.sln --locked-mode
+      run: dotnet restore ./EsentInterop/Esent.sln --use-lock-file --force-evaluate
 
     - name: Build Binaries
       run: dotnet build ./EsentInterop/Esent.sln --configuration Release --no-restore
