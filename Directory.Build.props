@@ -1,0 +1,68 @@
+<Project>
+  <PropertyGroup>
+    <!-- Configure the common NuGet package metadata -->
+    <PackageVersion>2.0.4</PackageVersion>
+    <Authors>Michael Grafnetter</Authors>
+    <CopyRight>© Microsoft Corporation. All rights reserved.</CopyRight>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MichaelGrafnetter/ManagedEsent</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MichaelGrafnetter/ManagedEsent.git</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <!-- We need to sign the binaries before generating the NuGet packages -->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <!-- Use lock files to enable NuGet package caching at GitHub -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- Do not generate NuGet packages for all projects by default (e.g., tests or samples) -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Additional files to include in NuGet packages -->
+    <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" PackagePath="/" Visible="false" />
+    <!-- Enable source-link -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <!-- Enable continuous integration build metadata for GitHub Actions -->
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <!-- Project-specific NuGet package metadata -->
+  <PropertyGroup Condition="'$(MSBuildProjectFile)' == 'EsentInterop.csproj'">
+    <!-- Generate a NuGet package for this project -->
+    <IsPackable>true</IsPackable>
+    <!-- Original package name: Microsoft.Database.ManagedEsent -->
+    <PackageId>DSInternals.ManagedEsent.Interop</PackageId>
+    <Description>ManagedEsent provides managed access to esent.dll, the embeddable database engine native to Windows.</Description>
+    <PackageTags>ManagedEsent NoSql ISAM Database Storage DatabaseEngine</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MSBuildProjectFile)' == 'isam.csproj'">
+    <!-- Generate a NuGet package for this project -->
+    <IsPackable>true</IsPackable>
+    <!-- Original package name: Microsoft.Database.Isam -->
+    <PackageId>DSInternals.ManagedEsent.Isam</PackageId>
+    <Description>The Microsoft.Database.Isam project provides a simpler object model interface to create and access databases, using Microsoft.Database.ManagedEsent (esent.dll). We are releasing it to see if anyone finds it useful. Please keep the feedback coming!</Description>
+    <PackageTags>ManagedEsent NoSql ISAM Database Storage DatabaseEngine</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MSBuildProjectFile)' == 'EsentCollections.csproj'">
+    <!-- Generate a NuGet package for this project -->
+    <IsPackable>true</IsPackable>
+    <!-- Original package name: Microsoft.Database.Collections.Generic -->
+    <PackageId>DSInternals.ManagedEsent.PersistentDictionary</PackageId>
+    <Description>PersistentDictionary is a simple class that implements IDictionary, and backs the storage to disk. It allows a simple key-value pair store. It supports strings, value-types, and binary blobs. It is built on the ManagedEsent library.</Description>
+    <PackageTags>ManagedEsent NoSql PersistentDictionary Persistent Dictionary Key-Value Store</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- Configure strong-name assembly signing using a public-private key pair intentionally published in the repo. -->
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)DSInternals.Community.snk</AssemblyOriginatorKeyFile>
+    <StrongNamePublicKey>0024000004800000940000000602000000240000525341310004000001000100f9c95d579b685ed337ed26b3488d2f036377cb1dbc8ecdecaaf0f0e7ebf79dee332b9b5c5247690746596f414a3f6882a0b471c2f0c0e3536e06d016d3b4a6ef804d61d390c97ed3bef73dc0ff0e3f5859299f384c50b2b9c2a1aabe3d42274f46cbab42a5a7246ec029d2696865cc8d6382f38882ca86e66bde7c9ac7a9d4ae</StrongNamePublicKey>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+</Project>
