@@ -49,8 +49,8 @@ using System.Runtime.InteropServices;
 // 1.9.3.3 2016.03.01. Some bug and perf fixes.
 // 1.9.4   2016.06.28. Some bug fixes.
 // 1.9.4.1 2017.08.30. Adding JetGetIndexInfo that returns JET_INDEXCREATE.
-[assembly: AssemblyVersion("1.9.4.1")]
-[assembly: AssemblyFileVersion("1.9.4.1")]
+[assembly: AssemblyVersion("2.0.4")]
+[assembly: AssemblyFileVersion("2.0.4")]
 
 #if STRONG_NAMED
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("EsentCollectionsTests,         PublicKey=0024000004800000940000000602000000240000525341310004000001000100f9c95d579b685ed337ed26b3488d2f036377cb1dbc8ecdecaaf0f0e7ebf79dee332b9b5c5247690746596f414a3f6882a0b471c2f0c0e3536e06d016d3b4a6ef804d61d390c97ed3bef73dc0ff0e3f5859299f384c50b2b9c2a1aabe3d42274f46cbab42a5a7246ec029d2696865cc8d6382f38882ca86e66bde7c9ac7a9d4ae")]

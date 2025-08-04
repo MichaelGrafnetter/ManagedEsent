@@ -1402,7 +1402,7 @@
       "dbutil": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       },
       "DSInternals.ManagedEsent.Interop": {
@@ -1479,7 +1479,7 @@
       "dbutil": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       },
       "DSInternals.ManagedEsent.Interop": {

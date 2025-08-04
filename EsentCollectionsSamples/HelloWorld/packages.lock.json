@@ -42,14 +42,14 @@
       "DSInternals.ManagedEsent.Isam": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       },
       "DSInternals.ManagedEsent.PersistentDictionary": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )",
-          "DSInternals.ManagedEsent.Isam": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )",
+          "DSInternals.ManagedEsent.Isam": "[2.0.4.1, )"
         }
       }
     },

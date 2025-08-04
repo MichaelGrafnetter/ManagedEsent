@@ -1402,7 +1402,7 @@
       "dbutil": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       },
       "DSInternals.ManagedEsent.Interop": {
@@ -1411,7 +1411,7 @@
       "DSInternals.ManagedEsent.Isam": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       }
     },
@@ -1485,7 +1485,7 @@
       "dbutil": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       },
       "DSInternals.ManagedEsent.Interop": {
@@ -1494,7 +1494,7 @@
       "DSInternals.ManagedEsent.Isam": {
         "type": "Project",
         "dependencies": {
-          "DSInternals.ManagedEsent.Interop": "[2.0.4, )"
+          "DSInternals.ManagedEsent.Interop": "[2.0.4.1, )"
         }
       }
     }

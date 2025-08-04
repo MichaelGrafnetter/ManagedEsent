@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- Configure the common NuGet package metadata -->
-    <PackageVersion>2.0.4</PackageVersion>
+    <PackageVersion>2.0.4.1</PackageVersion>
     <Authors>Michael Grafnetter</Authors>
     <CopyRight>© Microsoft Corporation. All rights reserved.</CopyRight>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -23,6 +23,7 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <!-- Do not generate NuGet packages for all projects by default (e.g., tests or samples) -->
     <IsPackable>false</IsPackable>
+    <PackageReleaseNotes>Fixed assembly versioning.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <!-- Additional files to include in NuGet packages -->
@@ -61,6 +62,8 @@
     <PackageTags>ManagedEsent NoSql PersistentDictionary Persistent Dictionary Key-Value Store</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- Enable deterministic builds -->
+    <Deterministic>true</Deterministic>
     <!-- Configure strong-name assembly signing using a public-private key pair intentionally published in the repo. -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)DSInternals.Community.snk</AssemblyOriginatorKeyFile>

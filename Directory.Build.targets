@@ -2,5 +2,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <!-- This constant enables public keys in InternalsVisibleTo. -->
     <DefineConstants>$(DefineConstants);STRONG_NAMED</DefineConstants>
+    <!-- Override the debug type configured in csproj files -->
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 </Project>
